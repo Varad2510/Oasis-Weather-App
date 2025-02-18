@@ -16,7 +16,7 @@ A simple weather application that fetches real-time weather data based on user i
 
 ### 1️⃣ Clone the Repository  
 ```sh
-git clone https://github.com/YourUsername/WeatherApp.git
+git clone https://github.com/Varad2510/OasisWeatherApp.git
 cd WeatherApp
 ```
 
@@ -41,6 +41,4 @@ The app fetches weather data using the OpenWeather API. Replace `API_KEY` in `ap
 ## 📝 License  
 This project is open-source and free to use.  
 
----  
 
-This README provides clarity on **what** the project does, **how** to set it up, and key **technologies** used. Let me know if you need modifications! 🚀
