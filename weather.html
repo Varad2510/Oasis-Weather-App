@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        input {
+            width: 80%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #weatherResult {
+            margin-top: 15px;
+            font-size: 16px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Weather App</h2>
+        <input type="text" id="cityInput" placeholder="Enter city name">
+        <button onclick="getWeather()">Get Weather</button>
+        <div id="weatherResult"></div>
+    </div>
+    <script>
+        async function getWeather() {
+            const city = document.getElementById("cityInput").value;
+            if (!city) {
+                alert("Please enter a city name");
+                return;
+            }
+            const response = await fetch(`http://127.0.0.1:5000/get-weather?city=${city}`);
+            const data = await response.json();
+            
+            if (data.error) {
+                document.getElementById("weatherResult").innerHTML = `<p style='color: red;'>${data.error}</p>`;
+            } else {
+                document.getElementById("weatherResult").innerHTML = `
+                    <h3>${data.name}, ${data.country}</h3>
+                    <p><strong>Temperature:</strong> ${data.temp}°C</p>
+                    <p><strong>Feels Like:</strong> ${data.feels_like}°C</p>
+                    <p><strong>Humidity:</strong> ${data.humidity}%</p>
+                    <p><strong>Condition:</strong> ${data.description}</p>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
